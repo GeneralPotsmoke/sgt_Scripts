@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  ombi:
+    image: ghcr.io/linuxserver/ombi
+    container_name: ombi
+    ports:
+      - "3579:3579"
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/New_York
+    volumes:
+      - /path/to/ombi:/config
+    restart: always
