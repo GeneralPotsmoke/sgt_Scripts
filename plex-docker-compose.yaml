@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  plex:
+    image: plexinc/pms-docker:latest
+    container_name: plex
+    environment:
+      - TZ=America/New_York
+      - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_CAPABILITIES=compute,video,utility
+    volumes:
+      - /path/to/media:/media
+      - /path/to/plex/config:/config
+      - /path/to/plex/transcoder:/transcode
+    ports:
+      - 32400:32400
+    devices:
+      - /dev/nvidia0:/dev/nvidia0
+      - /dev/nvidiactl:/dev/nvidiactl
+      - /dev/nvidia-uvm:/dev/nvidia-uvm
+      - /dev/nvidia-uvm-tools:/dev/nvidia-uvm-tools
+    runtime: nvidia
+    networks:
+      - external_network
+
+networks:
+  external_network:
+    driver: bridge
