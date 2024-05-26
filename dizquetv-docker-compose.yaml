@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  dizquetv:
+    image: vexorian/dizquetv:latest
+    container_name: dizquetv
+    ports:
+      - "8666:8000"
+    volumes:
+      - /path/to/dizquetv:/app/config
+    restart: unless-stopped
+
+networks:
+  external_network:
+    driver: bridge
